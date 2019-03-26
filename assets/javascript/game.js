@@ -1,32 +1,43 @@
+// set initail variables for wins, losses, remaining guesses, 
+// and previous guesses
+var gameDetails =[
+  letters = ['a','b','c','d','e','f','g','h','i',
+              'j','k','l','m','n','o','p','q','r',
+              's','t','u','v','w','x','y','z'
+              ],
+  winsCounter = 0,
+  lossesCounter = 0,
+  guessesLeft = 10,
+  userGuesses = [], 
+ ]
 
-var comLetters = ["a", "s", "w", "r", "o", "p", "c", "q", "x", "l"];
+console.log(gameDetails)
 
-// Creating a variable to hold our array length.
-var arrayLength = comLetters.length;
+// // Create variables that hold references to the places in the HTML where we want to display things.
+var directionsText = document.getElementById("directions-text");
+var userChoiceText = document.getElementById("userchoice-text");
+var winsText = document.getElementById("wins-text");
+var lossesText = document.getElementById("losses-text");
+var numGuess = document.getElementById("numGuess-text");
 
-// Looping through our comLetters array.
-for (var j = 0; j < arrayLength; j++) {
+window.onload = function () {
+  var letterGuess = letters[Math.floor(Math.random() * letters.length)]; 
+  }
+// This function is run whenever the user presses a key.
+ document.onkeyup = function(event) {
 
-  // Console out the letters in the current index.
-  console.log(comLetters[j]);
+// Determines which key was pressed.
+  var userGuess = event.key;
 
-}
+// creating "else if" statements to determine the outcome of game.
 
-// Function to render questions.
-    function renderQuestion() {
-        // If there are still more questions, render the next one.
-        if (questionIndex <= (questions.length - 1)) {
-          document.querySelector("#question").innerHTML = questions[questionIndex].q;
+   if (userGuesses === letterGuess) {
+        winsCounter ++ ; 
+        guessesLeft -- ;
+        alert ("Wowza, you got " + winsCounter + " right, you must be psychic!")}
+    else {
+        lossesCounter ++ ;
+        guessesLeft -- ;
+        alert ("Nope, you got " + lossesCounter + " wrong, you do not possess the gift!")
         }
-        // If there aren't, render the end game screen.
-        else {
-          document.querySelector("#question").innerHTML = "Game Over!";
-          document.querySelector("#score").innerHTML = "Final Score: " + score + " out of " + questions.length;
-        }
-      }
-  
-      // Function that updates the score...
-      function updateScore() {
-        document.querySelector("#score").innerHTML = "Score: " + score;
-      }
-  
+  }
