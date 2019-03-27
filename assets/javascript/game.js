@@ -1,13 +1,14 @@
 // set initail variables for wins, losses, remaining guesses, 
 // and previous guesses
 var computerChoices = ['a','b','c',
-              'd','e','f','g','h','i'];
-              // 'j','k','l','m','n','o','p','q','r',
-              // 's','t','u','v','w','x','y','z'
-              // ];
+              'd','e','f','g','h','i',
+              'j','k','l','m','n','o','p','q','r',
+              's','t','u','v','w','x','y','z'
+              ];
 var wins = 0;
 var losses = 0;
 var numGuess = 15;
+var prevGuess = [];
 
 console.log(computerChoices);
 
@@ -17,7 +18,7 @@ var userChoiceText = document.getElementById("userchoice-text");
 var computerChoiceText = document.getElementById("computerchoice-text");
 var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
-// var prevGuessText = document.getElementById ("prevGuess-text")
+var prevGuessText = document.getElementById ("prevGuess-text")
 var numGuessText = document.getElementById("numGuess-text");
 
 // This function is run whenever the user presses a key.
@@ -26,11 +27,12 @@ document.onkeyup = function(event) {
 // Determines which key was pressed.
     var userGuess = event.key;
 
-    console.log(userGuess)
+    prevGuess.push(userGuess)
+    console.log("guesses",prevGuess);
 
 // Randomly chooses a choice from the options array. This is the Computer's choice.
-    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-
+    var indexOfcomputerGuess = Math.floor(Math.random() * computerChoices.length)
+    var computerGuess = computerChoices[indexOfcomputerGuess];
 
 // creating "if/else" statement to determine the outcome of game.
 
@@ -48,6 +50,10 @@ document.onkeyup = function(event) {
       alert( "Game over... but you knew that")
     }
 
+//remove previously selected letter from computerChoices array
+    computerChoices.splice(indexOfcomputerGuess, 1);
+    console.log(computerChoices)
+
 // Hide the directions
     directionsText.textContent = "";
 
@@ -56,6 +62,6 @@ document.onkeyup = function(event) {
     computerChoiceText.textContent = "The computer chose: " + computerGuess;
     winsText.textContent = "Wins: " + wins;
     lossesText.textContent = "Losses: " + losses;
-    // prevGuessText.textContent = "Your guesses so far: " + prevGuess;
+    prevGuessText.textContent = "Your guesses so far: " + prevGuess;
     numGuessText.textContent = "Guesses Left: " + numGuess;
   }
